@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@mdi/font": "7.4.47",
+    "@tabler/icons-vue": "^3.27.1",
     "roboto-fontface": "*",
     "vue": "^3.4.31",
+    "vue-tabler-icons": "^2.21.0",
     "vuetify": "^3.6.14"
   },
   "devDependencies": {
