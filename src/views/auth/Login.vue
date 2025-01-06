@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import Logo from '../../layouts/full/logo/Logo.vue';
 import LoginForm from '../../components/auth/LoginForm.vue';
+import axios from 'axios';
+
+axios.defaults.withCredentials = true;
+axios.defaults.withXSRFToken = true;
+axios.get('http://localhost:8000/sanctum/csrf-cookie').then(() => {
+        axios.post('http://localhost:8000/api/login')
+    });
 </script>
 <template>
     <div class="authentication">
