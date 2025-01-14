@@ -1,7 +1,3 @@
-<script setup>
-import Logo from "../../layouts/full/logo/Logo.vue";
-import LoginForm from "../../components/auth/LoginForm.vue";
-</script>
 <template>
   <div class="authentication">
     <v-container fluid class="pa-3">
@@ -36,3 +32,8 @@ import LoginForm from "../../components/auth/LoginForm.vue";
     </v-container>
   </div>
 </template>
+
+<script setup>
+import Logo from "../../layouts/full/logo/Logo.vue";
+import LoginForm from "../../components/auth/LoginForm.vue";
+</script>
