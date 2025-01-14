@@ -17,7 +17,7 @@
               <h6
                 class="text-h6 text-muted font-weight-medium d-flex justify-center align-center mt-3"
               >
-                Nono no AgendaMe?
+                Novo no AgendaMe?
                 <RouterLink
                   :to="{ name: 'register' }"
                   class="text-primary text-decoration-none text-body-1 opacity-1 font-weight-medium pl-2"
