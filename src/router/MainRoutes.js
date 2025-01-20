@@ -1,6 +1,9 @@
+import { auth } from "./Guards";
+
 export default {
   path: "/",
   component: () => import("@/layouts/full/FullLayout.vue"),
+  beforeEnter: auth,
 
   children: [
     {

@@ -2,7 +2,6 @@
   <v-alert v-if="feedbackMessage" color="error" class="mb-2">{{
     feedbackMessage
   }}</v-alert>
-  {{ isSubmitting }}
   <v-form @submit.prevent="submit">
     <v-row class="d-flex mb-3">
       <v-col cols="12">
@@ -57,6 +56,9 @@ import { useForm, useField } from "vee-validate";
 import { object, string } from "yup";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
+import { useMeStore } from "@/stores/me";
+
+const meStore = useMeStore();
 
 const schema = object({
   email: string().required().email().label("E-mail"),
@@ -81,15 +83,15 @@ const authStore = useAuthStore();
 function login(values) {
   feedbackMessage.value = "";
 
-  return authStore.sanctum().then(() => {
-    authStore
-      .login(values.email, values.password)
-      .then(() => {
-        router.push({ name: "dashboard" });
-      })
-      .catch((error) => {
-        feedbackMessage.value = "Seu e-mail ou senha estão incorretos.";
-      });
-  });
+  return authStore
+    .login(values.email, values.password)
+    .then(() => {
+      router.push({ name: "dashboard" });
+    })
+    .catch((error) => {
+      const apiMessage = error.response.data.message; // Acessa o campo "message" da resposta
+
+      feedbackMessage.value = apiMessage; // Mostra a mensagem específica da API
+    });
 }
 </script>
