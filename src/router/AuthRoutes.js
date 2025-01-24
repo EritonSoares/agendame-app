@@ -1,5 +1,4 @@
-import { useMeStore } from "@/stores/me";
-import { redirectIfAuthenticated } from "./Guards";
+import { checkIfTokenExists, redirectIfAuthenticated } from "./Guards";
 
 export default [
   {
@@ -22,6 +21,18 @@ export default [
         name: "register",
         path: "",
         component: () => import("@/views/auth/Register.vue"),
+      },
+    ],
+  },
+  {
+    path: "/verificar-email",
+    component: () => import("@/layouts/blank/BlankLayout.vue"),
+    beforeEnter: checkIfTokenExists,
+    children: [
+      {
+        name: "verifyEmail",
+        path: "",
+        component: () => import("@/views/auth/VerifyEmail.vue"),
       },
     ],
   },

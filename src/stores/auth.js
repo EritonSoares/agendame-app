@@ -27,6 +27,9 @@ export const useAuthStore = defineStore("auth", {
         password,
       });
     },
+    verifyEmail(token) {
+      return axios.post("api/verify-email", { token });
+    },
   },
   getters: {},
 });

@@ -53,6 +53,15 @@ import { useForm, useField } from "vee-validate";
 import { object, string } from "yup";
 import { useAuthStore } from "@/stores/auth";
 
+const emit = defineEmits(["done"]);
+const props = defineProps({
+  email: {
+    type: String,
+    default: "",
+  },
+  emailDisabled: Boolean,
+});
+
 const schema = object({
   first_name: string().required().label("Nome"),
   email: string().required().email().label("E-mail"),
@@ -73,7 +82,10 @@ const { handleSubmit, errors, isSubmitting } = useForm({
   initialValues: {
     first_name: "Eriton",
     email: "ee_soares@hotmail.com",
-    password: "123456",
+    password: "Eeee123@",
+    // first_name: '',
+    // email: props.email,
+    // password: ''
   },
 });
 const submit = handleSubmit(async (values) => {
@@ -81,11 +93,15 @@ const submit = handleSubmit(async (values) => {
 
   await authStore
     .register(values.first_name, values.email, values.password)
+    .then(async () => {
+      await authStore.login(values.email, values.password);
+      emit("done");
+    })
     .catch((error) => {
       if (error.response && error.response.data) {
         const apiMessage = error.response.data.message; // Acessa o campo "message" da resposta
 
-        feedbackMessage.value = apiMessage; // Mostra a mensagem específica da API
+        feedbackMessage.value = "O e-mail informado já existe!"; //apiMessage; // Mostra a mensagem específica da API
       }
     });
 });

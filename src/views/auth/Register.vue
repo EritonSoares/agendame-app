@@ -1,7 +1,3 @@
-<script setup lang="ts">
-import Logo from "../../layouts/full/logo/Logo.vue";
-import RegisterForm from "../../components/auth/RegisterForm.vue";
-</script>
 <template>
   <div class="authentication">
     <v-container fluid class="pa-3">
@@ -17,7 +13,7 @@ import RegisterForm from "../../components/auth/RegisterForm.vue";
               <div class="d-flex justify-center py-4">
                 <Logo />
               </div>
-              <RegisterForm />
+              <RegisterForm @done="afterRegister" />
               <h6
                 class="text-h6 text-muted font-weight-medium d-flex justify-center align-center mt-3"
               >
@@ -36,3 +32,14 @@ import RegisterForm from "../../components/auth/RegisterForm.vue";
     </v-container>
   </div>
 </template>
+
+<script setup>
+import Logo from "../../layouts/full/logo/Logo.vue";
+import RegisterForm from "../../components/auth/RegisterForm.vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+function afterRegister() {
+  router.push({ name: "dashboard" });
+}
+</script>
